@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Pothole Detection - Upload{% endblock %}
+
+{% block content %}
+<div class="upload-container">
+    <h1>Pothole Detection</h1>
+    <div class="upload-box">
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <div class="file-input-container">
+                <input type="file" name="file" id="file" accept="image/*" class="file-input" required>
+                <label for="file" class="file-label">
+                    <span class="file-icon">📁</span>
+                    <span class="file-text">Choose an image</span>
+                </label>
+                <span class="selected-file-name"></span>
+            </div>
+            <button type="submit" class="upload-button">Upload and Analyze</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .upload-container {
+        width: 90%;
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        color: #fff;
+    }
+
+    .upload-box {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .file-input-container {
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+
+    .file-input {
+        position: absolute;
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        z-index: -1;
+    }
+
+    .file-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .file-label:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .file-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .file-text {
+        font-size: 1.1rem;
+        color: #fff;
+    }
+
+    .selected-file-name {
+        display: block;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .upload-button {
+        background: #00c853;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .upload-button:hover {
+        background: #00e676;
+        transform: scale(1.05);
+    }
+</style>
+
+<script>
+    // Display selected filename
+    document.querySelector('.file-input').addEventListener('change', function(e) {
+        const fileName = e.target.files[0] ? e.target.files[0].name : 'No file selected';
+        document.querySelector('.selected-file-name').textContent = fileName;
+        document.querySelector('.file-text').textContent = 'File selected';
+    });
+</script>
+{% endblock %}
